@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Home</title>
+    <style>
+        td{
+            padding: 5px;
+        }
+        th{
+            padding: 5px; 
+        }
+        .textoL{
+            text-decoration: underline;
+            color: blue;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <h2>Bienvenido al API</h2>
+    <table border=1>
+        <thead>
+            <tr>
+                <th>Descripción</th>
+                <th>Ruta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Ruta Inexistente</td>
+                <td><p onclick="llamarRutaInexistente('/api/usuarios/RutaInexistente')" class="textoL">Ruta Inexistente</p></td>
+            </tr>
+            <tr>
+                <td>Ruta GET</td>
+                <td><p onclick="llamarGet('/api/usuarios/')" class="textoL">Ruta GET</p></td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <div id="resultado" ></div>
+</body>
+</html>
+<script>
+    function llamarRutaInexistente(url){
+        $.get(
+            url,
+            {},
+            function(data) {
+                $("#resultado").html(data);
+            }
+        );
+    }
+    function llamarGet(url){
+        $.get(
+            url,
+            {
+                q : "18"
+            },
+            function(data) {
+                $("#resultado").html(
+                    `
+                    <p>Mensaje : ${ data.msg } </p>
+                    <p>Valor : ${ data.q } </p>
+                    `
+                );
+            }
+        );
+    }
+</script>
